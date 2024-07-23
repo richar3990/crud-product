@@ -2,6 +2,9 @@ package com.prueba.crudproduct;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class CrudproductApplication {
@@ -9,5 +12,19 @@ public class CrudproductApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CrudproductApplication.class, args);
 	}
+        
+        @Bean
+        public WebMvcConfigurer corsConfigurer(){
+            return new WebMvcConfigurer() {
+                @Override
+                public void addCorsMappings(CorsRegistry registry){
+                    registry.addMapping("/**")
+                            .allowedOrigins("*")
+                            .allowedMethods("*")
+                            .allowedHeaders("*");
+                }
+            };
+                    
+        }
 
 }
